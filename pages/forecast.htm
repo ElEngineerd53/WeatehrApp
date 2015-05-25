@@ -6,10 +6,10 @@
 		<div class="col-mid-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<h3 class="panel-title">{{ w.dt }}</h3> <!-- Date -->
+					<h3 class="panel-title">{{convertToDate(w.dt) | date:'MMM d, y'}}</h3> <!-- Date -->
 				</div>
 				<div class="panel-body">
-					Daytime Temperature: {{ w.temp.day }} <!-- Temp -->
+					Daytime Temperature: {{convertToFahrenheit(w.temp.day)}}°<!-- Temp -->
 				</div>
 			</div>
 		</div>
