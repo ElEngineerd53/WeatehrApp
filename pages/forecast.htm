@@ -1,0 +1,17 @@
+<!-- Forecast -->
+<h1>Forecast {{ city }}</h1>
+
+<div ng-repeat="w in weatherResult.list">
+	<div class="row">
+		<div class="col-mid-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">{{ w.dt }}</h3> <!-- Date -->
+				</div>
+				<div class="panel-body">
+					Daytime Temperature: {{ w.temp.day }} <!-- Temp -->
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
