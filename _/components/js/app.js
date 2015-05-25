@@ -6,13 +6,27 @@ var weatherApp = angular.module('weatherApp', ['ngRoute', 'ngResource']);
 /*
 	SERVICE
 */
-weatherApp.service('cityService', function(){
-	this.city = "Los Angeles, LA";
+weatherApp.service('cityService', function() {
+	this.city = "";
 });
 
 /*
 	DIRECTIVES
 */
+weatherApp.directive("weatherReport", function() {
+	return {
+		restrict: 'E',
+		templateUrl: 'directives/weatherReport.html',
+		replace: true,
+
+		scope: {
+			weatherDay: "=",
+			convertToStandard: "&",
+			convertToDate: "&",
+			dateFormat: "@"
+		}
+	}
+});
 
 /*
 	CONTROLLERS
@@ -25,13 +39,15 @@ weatherApp.controller('mainController', ['$scope', '$log', 'cityService', functi
 	});
 }]);
 
-weatherApp.controller('forecastController', ['$scope', '$log', '$resource', 'cityService', function ($scope, $log, $resource, cityService) {
+weatherApp.controller('forecastController', ['$scope', '$log', '$resource', '$routeParams', 'cityService', function ($scope, $log, $resource, $routeParams, cityService) {
 	$scope.city = cityService.city;
+
+	$scope.days = $routeParams.days || '2';
 
 	$scope.weatherAPI = $resource("http://api.openweathermap.org/data/2.5/forecast/daily?", 
 		{callback: "JSON_CALLBACK"}, { get: { method:"JSONP"}});
 
-	$scope.weatherResult = $scope.weatherAPI.get({ q:$scope.city, cnt:2 });
+	$scope.weatherResult = $scope.weatherAPI.get({q: $scope.city, cnt: $scope.days});
 
 	$scope.convertToFahrenheit = function (degK) {
 		return Math.round((1.8*(degK -273))+32);
@@ -40,19 +56,7 @@ weatherApp.controller('forecastController', ['$scope', '$log', '$resource', 'cit
 	$scope.convertToDate = function (dt) {
 		return new Date(dt * 1000);
 	};
-}]);
 
-/*
-	ROUTES
-*/
-weatherApp.config(function ($routeProvider) {
-    $routeProvider
-    .when('/', {
-        templateUrl: 'pages/main.htm',
-        controller: 'mainController'
-    })
-    .when('/forecast', {
-        templateUrl: 'pages/forecast.htm',
-        controller: 'forecastController'
-    })
-});
+	// $scope.convertToIcon = function ()
+	console.log($scope);
+}]);

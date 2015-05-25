@@ -1,17 +1,19 @@
 <!-- Forecast -->
-<h1>Forecast {{ city }}</h1>
-
+<h1 class="wi wi-day-storm-showers"> Forecast {{ city }}</h1>
+<hr/>
+Select Number of Days You Want Forcasted: 
+	<a class="btn btn-success" href="#/forecast/2" ng-class="{ 'btn active': days === '2'}">2 Days</a>
+	<a class="btn btn-success" href="#/forecast/3" ng-class="{ 'btn active': days === '3'}">3 Days</a>
+	<a class="btn btn-success" href="#/forecast/4" ng-class="{ 'btn active': days === '4'}">4 Days</a>
+	<a class="btn btn-success" href="#/forecast/5" ng-class="{ 'btn active': days === '5'}">5 Days</a>
+	<a class="btn btn-success" href="#/forecast/6" ng-class="{ 'btn active': days === '6'}">6 Days</a>
+	<a class="btn btn-success" href="#/forecast/7" ng-class="{ 'btn active': days === '7'}">7 Days</a>
+<hr/>
 <div ng-repeat="w in weatherResult.list">
 	<div class="row">
 		<div class="col-mid-12">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h3 class="panel-title">{{convertToDate(w.dt) | date:'MMM d, y'}}</h3> <!-- Date -->
-				</div>
-				<div class="panel-body">
-					Daytime Temperature: {{convertToFahrenheit(w.temp.day)}}°<!-- Temp -->
-				</div>
-			</div>
+			<weather-report weather-day="w" convert-to-standard="convertToFahrenheit(daytimeTemp)" 
+							convert-to-date="convertToDate(dt)" date-format="MMMM d, y"></weather-report>
 		</div>
 	</div>
 </div>

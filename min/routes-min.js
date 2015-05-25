@@ -1,0 +1,1 @@
+weatherApp.config(function(e){e.when("/",{templateUrl:"pages/main.htm",controller:"mainController"}).when("/forecast",{templateUrl:"pages/forecast.htm",controller:"forecastController"}).when("/forecast/:days",{templateUrl:"pages/forecast.htm",controller:"forecastController"}).otherwise({redirectTo:"/"})});
