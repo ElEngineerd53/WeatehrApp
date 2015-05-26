@@ -1,0 +1,1 @@
+weatherApp.directive("weatherReport",function(){return{restrict:"E",templateUrl:"directives/weatherReport.html",replace:!0,scope:{weatherDay:"=",convertToStandard:"&",convertToDate:"&",dateFormat:"@"}}});
